@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: notificationarff-configmap
+data:
+  ARFF_QUEUE: "arff"
+  CSV_QUEUE: "csv"

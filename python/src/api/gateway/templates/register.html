@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>FileSurfer</title>
+	<!--<link rel="stylesheet" type="text/css" href="style.css">-->
+	<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+</head>
+<body>
+	<div id="page">
+		<div id="logo">
+			<center><img src="{{ url_for('static',filename='fss.png') }}" width="200px" height="130px" style="margin-top: 15px; margin-bottom: 15px;" alt="FileSurfer" /></center>
+		</div>
+		<div id="">
+			<nav class="links" style="--items: 4;">
+				{% for item in navbar %}
+					{% if item.text == 'Register' %}
+						<a class="selected" href="{{item.url}}">{{item.text}}</a>
+					{% else %}
+                    	<a href="{{item.url}}">{{item.text}}</a>
+					{% endif %}
+              	{% endfor %}
+				<span class="line"></span>
+			</nav>
+ 		</div>
+		<br/><br/><br/><br/>
+		<center>
+			<div className="registrationDiv">
+				<form action="/register" method="POST">
+					<input type="email" name="username" placeholder="Email"> <br><br>
+					<input type="password" name="password" placeholder="Password"> <br><br>
+					<input type="submit" value="Register">
+				  </form>
+			</div>
+		</center>
+		
+	</div>
+</body>
+</html>

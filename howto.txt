@@ -1,0 +1,27 @@
+Requirements
+To install:
+	- docker
+	- minikube
+
+Run the following command to start minikube:
+	$ minikube start
+	
+Please check if your minikube version has ingress & metrics-server:
+	$ minikube start
+	$ minikube addons list
+	
+Enable it if not already enabled:
+	$ minikube addons enable ingress
+	$ minikube addons enable metrics-server
+
+Run the following command:
+	$ minikube tunnel
+	
+Move to the directory /FileSurfer/python/src/api, and for each directory run the following command:
+	$ kubectl apply -f ./manifests
+
+Edit youn /etc/hosts file and add the following line:
+	127.0.0.1 	filesurfer.com
+	127.0.0.1	rabbitmq-manager.com
+	
+Open your browser and digit: filesurfer.com

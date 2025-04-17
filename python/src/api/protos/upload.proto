@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "../uploadcsv/";
+option java_outer_classname = "UploadProto";
+option objc_class_prefix = "LOG";
+package uploadcsv;
+
+service Upload {
+  rpc doUpload (UploadRequest) returns (UploadReply) {} // For Upload
+
+}
+
+message UploadRequest {
+  string username = 1;
+  bytes data = 2;
+}
+
+message UploadReply {
+  string text = 1;
+  int32 status_code = 2; 
+}
+

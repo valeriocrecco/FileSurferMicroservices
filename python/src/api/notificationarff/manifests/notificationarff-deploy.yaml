@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notificationarff
+  labels:
+    app: notificationarff
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notificationarff
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 4
+  template:
+    metadata:
+      labels:
+        app: notificationarff
+    spec:
+      containers:
+        - name: notificationarff
+          image: valerio9723/notificationarff
+          envFrom:
+            - configMapRef:
+                name: notificationarff-configmap
+            - secretRef:
+                name: notificationarff-secret
+          resources:
+            limits:
+              cpu: 300m
+            requests:
+              cpu: 250m
+
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: notificationarff-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: notificationarff
+  minReplicas: 1
+  maxReplicas: 5
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 0
+    scaleUp:
+      stabilizationWindowSeconds: 0
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target: 
+          type: Utilization
+          averageUtilization: 30

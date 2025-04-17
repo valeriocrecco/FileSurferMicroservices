@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>FileSurfer</title>
+	<!--<link rel="stylesheet" type="text/css" href="style.css">-->
+	<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+</head>
+<body>
+	<div id="page">
+		<div id="logo">
+			<center><img src="{{ url_for('static',filename='fss.png') }}" width="200px" height="130px" style="margin-top: 15px; margin-bottom: 15px;" alt="FileSurfer" /></center>
+		</div>
+		<div>
+			<nav class="links" style="--items: 4;">
+				{% for item in navbar %}
+					{% if item.text == 'Download' %}
+						<a class="selected" href="{{item.url}}">{{item.text}}</a>
+					{% else %}
+						<a href="{{item.url}}">{{item.text}}</a>
+					{% endif %}
+              	{% endfor %}
+				<span class="line"></span>
+			</nav>
+		</div>
+		{% with errors = get_flashed_messages() %}
+		{% if errors %}
+		<div class="alert">
+			<span class="closebtn" onclick="this.parentElement.style.display = 'none';">
+				&times;
+			</span>
+			<ul>
+				{%- for msg in errors %}
+				<li>{{ msg }}</li>
+				{% endfor -%}
+			</ul>
+		</div>
+		{% endif %}
+	 	{% endwith %}
+		<br/><br/><br/><br/>
+		<center>	
+		<div>
+			<h1> Filesurfer Converter System </h1><br/>
+			<h2> File Convert & Download with Microservices! </h2>
+			<br/><br/><br/><br/>
+			<form action="/download_arff" method="get" enctype="multipart/form-data">
+				<input type="text" name="fidARFF" placeholder="File id"> <br/><br/>
+				<input type="submit" value="Download file ARFF">
+			</form>
+			<br/><br/><br/><br/><br/><br/>
+			<form action="/logout" method="get" enctype="multipart/form-data">
+				<input type="submit" value="Logout">
+			</form>
+		</div>
+		</center>
+		
+	</div>
+</body>
+</html>

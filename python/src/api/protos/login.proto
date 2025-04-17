@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "../auth/";
+option java_outer_classname = "LoginProto";
+option objc_class_prefix = "LOG";
+package auth;
+
+service Login {
+  rpc doLogin (LoginRequest) returns (LoginReply) {} // For login
+  rpc doRegistration (RegistrationRequest) returns (RegistrationReply) {} // For Registration
+  rpc doValidate (ValidateRequest) returns (ValidateReply) {} // For Validate
+}
+
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message LoginReply {
+  string token = 1;
+  int32 status_code = 2; 
+}
+
+message RegistrationRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message RegistrationReply {
+  string text = 1;
+  int32 status_code = 2; 
+}
+
+message ValidateRequest {
+  string token = 1;
+}
+
+message ValidateReply {
+  string text = 1;
+  string username = 2; 
+  int32 status_code = 3;
+}

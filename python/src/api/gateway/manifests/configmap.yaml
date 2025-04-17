@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gateway-configmap
+data:
+  AUTH_SVC_ADDRESS: "auth:5000"
+  DOWNLOAD_SVC_ADDRESS: "downloadarff:5001"
+  UPLOAD_SVC_ADDRESS: "uploadcsv:5002"
